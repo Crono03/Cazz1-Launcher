@@ -1,3 +1,3 @@
-pub mod userOS;
-pub mod getLocalization;
-pub mod writePrefs;
+pub mod user_os;
+pub mod write_prefs;
+pub mod get_localization;
