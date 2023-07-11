@@ -1,35 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Login from "./components/Login";
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import GuestDashboard from "./components/GuestDashboard";
 
-const Home = () => {
+const LoginPage = () => {
   const [firstTimeUser, setFirstTimeUser] = useState(true);
-
-  useEffect(() => {
-    
-    // Verifica se l'utente ha effettuato il login con successo in precedenza
-    const hasLoggedInBefore = localStorage.getItem('hasLoggedInBefore');
-    if (hasLoggedInBefore) {
-      setFirstTimeUser(false);
-    }
-  }, []);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [guestView, setGuestView] = useState(false);
   
+  const handleContinueAsGuest = (guestViewValue: boolean) => {
+    setGuestView(guestViewValue);
+  };
+
+
+  const handleLogin = (usernameEmail: string, password: string) => {
+    // Esegui la logica di autenticazione o gestione dei dati dell'utente
+    // Puoi aggiungere qui la logica per verificare le credenziali e gestire il login
+
+    // Esempio di login di successo
+    localStorage.setItem('hasLoggedInBefore', 'true');
+    setFirstTimeUser(false);
+    setLoggedIn(true);
+  };
+
   return (
-    <div>
-      {firstTimeUser ? <Login /> : <h2>Welcome to the App</h2>}
-      {/* Altri contenuti della pagina */}
-    </div>
+        <Login onLogin={handleLogin} />
   );
 };
 
-export default function App() {
+const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LoginPage />} />
       </Routes>
     </Router>
   );
 }
+
+export default App;
