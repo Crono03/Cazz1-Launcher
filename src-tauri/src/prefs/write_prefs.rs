@@ -3,7 +3,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use serde_json::json;
 
-pub fn check_osPath(os: &str) {
+pub fn check_os_path(os: &str) {
     match os {
         "Windows" => {
             println!("Stai utilizzando il sistema operativo Windows.");

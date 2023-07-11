@@ -1,4 +1,4 @@
-use super::writePrefs;
+use super::write_prefs::check_os_path;
 
 
 
@@ -19,6 +19,6 @@ fn get_os() -> &'static str {
 
 pub fn user_os() {
     let os = get_os();
-    writePrefs::check_osPath(&os);
+    check_os_path(&os);
     
 }
