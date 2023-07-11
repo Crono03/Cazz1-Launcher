@@ -1,3 +1,4 @@
+import HomePage from './pages/Homepage';
 import React, { useState } from "react";
 import "./App.css";
 import Login from "./components/Login";
@@ -35,6 +36,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/homepage" element={<HomePage />} />
       </Routes>
     </Router>
   );
