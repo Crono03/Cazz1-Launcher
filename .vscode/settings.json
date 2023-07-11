@@ -26,5 +26,11 @@
     "test/**/__snapshots__": true,
     "package-lock.json": true,
     "*.{css,sass,scss}.d.ts": true
-  }
+  },
+  "rust-analyzer.linkedProjects": [
+    ".\\src-tauri\\Cargo.toml",
+    ".\\src-tauri\\Cargo.toml",
+    ".\\src-tauri\\Cargo.toml",
+    ".\\src-tauri\\Cargo.toml"
+  ]
 }
