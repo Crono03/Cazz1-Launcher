@@ -1,6 +1,8 @@
 # Tauri + React + Typescript + CACAZZ1 DOSTQ 
 
 This template should help get you started developing with Tauri, React and Typescript in Vite.
+## Requirements
+- [Node.js](https://nodejs.org/en) + [Rust](https://www.rust-lang.org/)
 
 ## Recommended IDE Setup
 
