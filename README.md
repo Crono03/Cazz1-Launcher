@@ -11,6 +11,7 @@ This template should help get you started developing with Tauri, React and Types
 ## start contribute 
 ```  
 git clone https://github.com/Crono03/Cazz1-Launcher.git
+cd Cazz1-Launcher
 npm install
 npm run tauri dev
 ```
