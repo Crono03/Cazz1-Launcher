@@ -4,7 +4,7 @@ import "./App.css";
 import Login from "./components/Login";
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import GuestDashboard from "./components/GuestDashboard";
+import ChangeLog from './components/ChangeLog';
 
 const LoginPage = () => {
   const [firstTimeUser, setFirstTimeUser] = useState(true);
@@ -35,8 +35,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/homepage" element={<HomePage />} />
+        <Route index element={<LoginPage />} />
+        <Route path="homepage" element={<HomePage />} >
+            <Route path="changelog" element={<ChangeLog />}/>
+        </Route>
       </Routes>
     </Router>
   );
