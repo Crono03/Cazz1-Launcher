@@ -1,3 +1,4 @@
+import { invoke } from '@tauri-apps/api/tauri';
 import { log } from "console";
 import React from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ const HomePage = () => {
     const navigate= useNavigate();
 
     function goToPage(page: string) {
+        //invoke("database").then((msg) => console.log(msg))
         navigate(page)
     }
 

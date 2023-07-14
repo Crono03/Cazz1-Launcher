@@ -1,4 +1,3 @@
-import { type } from "os";
 import React from "react";
 
 const ChangeLog = () => {
@@ -7,6 +6,7 @@ const ChangeLog = () => {
         contenuto: string,
         data: string,
     }
+
     // Qui puoi inserire il codice per il tuo componente ChangeLog
     return (
         <div>
