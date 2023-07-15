@@ -6,7 +6,7 @@ const ChangeLog = () => {
         contenuto: string,
         data: string,
     }
-
+    
     // Qui puoi inserire il codice per il tuo componente ChangeLog
     return (
         <div>
