@@ -8,7 +8,7 @@ const HomePage = () => {
     const navigate= useNavigate();
 
     function goToPage(page: string) {
-        //invoke("database").then((msg) => console.log(msg))
+        invoke("database").then((msg) => console.log(msg))
         navigate(page)
     }
 

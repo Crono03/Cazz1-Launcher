@@ -2,13 +2,15 @@ import './login.css';
 import { getTranslation } from '../backend/languageManager';
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { invoke } from '@tauri-apps/api';
 // Quando la lingua cambia, impostala nel modulo di gestione delle lingue
 
 
 
-const Login = ({ onLogin }: { onLogin: (usernameEmail: string, password: string) => void }) => {
-    const [usernameEmail, setUsernameEmail] = useState("");
-    const [password, setPassword] = useState("");
+const Login = () => {
+    const [getusernameEmail, setUsernameEmail] = useState("");
+    const [getpassword, setPassword] = useState("");
+    const [getvalidate, setValidate] = useState("");
 
     const [goToHomePage, setGoToHomePage] = React.useState(false);
 
@@ -17,9 +19,10 @@ const Login = ({ onLogin }: { onLogin: (usernameEmail: string, password: string)
     }
 
     const handleLogin = () => {
-        console.log("Username/Email:", usernameEmail);
-        console.log("Password:", password);
-        setGoToHomePage(true);
+        invoke("login", {username: getusernameEmail, password: getpassword})
+            .then((_) => setGoToHomePage(true))
+            .catch((error) => setValidate(error));
+        
     };
 
     const handleContinueAsGuest = () => {
@@ -30,17 +33,18 @@ const Login = ({ onLogin }: { onLogin: (usernameEmail: string, password: string)
     return (
         <div className="login-container">
             <h2>Login</h2>
+            <p className="errore">{getvalidate}</p>
             <div className="input-container">
                 <label htmlFor="usernameEmail">Username/Email</label>
                 <input type="text" id="usernameEmail"
-                    value={usernameEmail}
+                    value={getusernameEmail}
                     onChange={(e) => setUsernameEmail(e.target.value)} />
                 <div className="input-line"></div>
             </div>
             <div className="input-container">
                 <label htmlFor="usernameEmail">Password</label>
                 <input type="text" id="password"
-                    value={password}
+                    value={getpassword}
                     onChange={(e) => setPassword(e.target.value)} />
                 <div className="input-line"></div>
             </div>
@@ -58,7 +62,3 @@ const Login = ({ onLogin }: { onLogin: (usernameEmail: string, password: string)
 };
 
 export default Login;
-
-function setGuestView(arg0: boolean) {
-    throw new Error('Function not implemented.');
-}
