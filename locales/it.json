@@ -1,5 +1,6 @@
 {
     "login": "Accedi",
-    "continueAsGuest": "Continua come ospite"
+    "continueAsGuest": "Continua come ospite",
+    "invalidPassword": "Username o Password errati"
   }
   
