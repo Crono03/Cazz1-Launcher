@@ -11,6 +11,7 @@ const Login = () => {
     const [getusernameEmail, setUsernameEmail] = useState("");
     const [getpassword, setPassword] = useState("");
     const [getvalidate, setValidate] = useState("");
+    const [passwordVisible, setpasswordVisible] = useState(false);
 
     const [goToHomePage, setGoToHomePage] = React.useState(false);
     const [goToSignUpPage, setGoToSignUpPage] = React.useState(false);
@@ -40,17 +41,18 @@ const Login = () => {
             <h2>Login</h2>
             <p className="errore">{getvalidate}</p>
             <div className="input-container">
-                <label htmlFor="usernameEmail">Username/Email</label>
-                <input type="text" id="usernameEmail"
+                <label htmlFor="usernameemail">Username/Email</label>
+                <input type="text" id="usernameemail"
                     value={getusernameEmail}
                     onChange={(e) => setUsernameEmail(e.target.value)} />
                 <div className="input-line"></div>
             </div>
             <div className="input-container">
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password"
+                <input type={passwordVisible ? "text" : "password"} id="password"
                     value={getpassword}
                     onChange={(e) => setPassword(e.target.value)} />
+                <img id="togglepasswordview" onClick={() => setpasswordVisible(!passwordVisible)} src={passwordVisible ? "/src/assets/images/hide.png" : "/src/assets/images/show.png"}/>
                 <div className="input-line"></div>
             </div>
             <div className='centered-content'>

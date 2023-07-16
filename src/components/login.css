@@ -1,3 +1,16 @@
+#password, #confirm-password {
+    width: 94%;
+}
+
+#togglepasswordview {
+    margin-top: 10px;
+}
+
+#togglepasswordview {
+    float: right;
+    width: 5%;
+}
+
 .signup-button {
     background-color: #2a62fe;
     color: white;
@@ -69,7 +82,10 @@ label {
 
 }
 
-
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
 
 input {
     width: 100%;
