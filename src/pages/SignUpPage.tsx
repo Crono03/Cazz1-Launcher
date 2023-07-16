@@ -1,8 +1,10 @@
 import { invoke } from "@tauri-apps/api";
 import React from "react";
 import { useState } from "react";
+import { getTranslation } from "../backend/languageManager";
 
 import "../components/login.css"
+import { I } from "@tauri-apps/api/path-c062430b";
 const SignUpPage = () => {
     const [getusername, setUsername] = useState("");
     const [getEmail, setEmail] = useState("");

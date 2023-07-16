@@ -21,9 +21,9 @@ enum Error {
     InvalidEmail(String),
     #[error("{0}")]
     InvalidUsername(String),
-    #[error("{0}")]
+    #[error("psoelllo1")]
     InvalidPasswordLenght(String),
-    #[error("{0}")]
+    #[error("invalidPassword")]
     InvalidPassword(String)
 }
 
@@ -84,7 +84,7 @@ async fn signup(username: &str, email: &str, password: &str, confirm_password: &
     .await?;
     db.use_ns("test").use_db("test").await?;
 
-    let result: Record= db.create(("users", username)).content(User {
+    let result: Record = db.create(("users", username)).content(User {
         email: email.to_string(),
         password: password.to_string()
     })

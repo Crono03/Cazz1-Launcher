@@ -1,5 +1,6 @@
 {
     "login": "Log in",
-    "continueAsGuest": "Continue as guest"
+    "continueAsGuest": "Continue as guest",
+    "invalidPassword": "Username or Password wrong!"
   }
   
