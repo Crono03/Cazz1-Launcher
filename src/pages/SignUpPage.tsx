@@ -1,6 +1,7 @@
 import { invoke } from "@tauri-apps/api";
 import React from "react";
 import { useState } from "react";
+import { getTranslation } from "../backend/languageManager";
 
 import "../components/login.css"
 const SignUpPage = () => {
@@ -11,7 +12,7 @@ const SignUpPage = () => {
     const [getvalidate, setValidate] = useState("");
     const [passwordVisible, setpasswordVisible] = useState(false);
     const handleSignUp = () => {
-        invoke("signup", { username: getusername, email: getEmail, password: getpassword, confirmPassword: getconfirmpassword }).then((validato) => console.log(validato)).catch((reason) => setValidate(reason))
+        invoke("signup", { username: getusername, email: getEmail, password: getpassword, confirmPassword: getconfirmpassword }).then((validato) => console.log(validato)).catch((reason) => { setValidate(getTranslation(reason)); console.log(reason) })
     };
 
 
