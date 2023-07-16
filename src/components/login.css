@@ -1,3 +1,43 @@
+.signup-button {
+    background-color: #2a62fe;
+    color: white;
+    border-radius: 5px;
+    background: linear-gradient(145deg, #2658e5, #2d69ff);
+    box-shadow:  24px 24px 49px #2453d8,
+    -24px -24px 49px #3071ff;
+    margin-right: -10px;
+}
+
+.separator {
+    margin-top: 30px;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    z-index: 9;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    font-family: inherit;
+    flex: 1;
+    border-bottom: 1px solid #fff;
+    z-index: 9;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+    font-family: inherit;
+    z-index: 9;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+    font-family: inherit;
+    z-index: 9;
+}
+
 .errore {
     color: red;
     font-size: 20px;
@@ -13,73 +53,73 @@
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     width: 400px;
     padding: 20px;
-    
-    
-  }
 
-  
-  .input-container {
+
+}
+
+
+.input-container {
     margin-bottom: 20px;
-    
-  }
-  
-  label {
+
+}
+
+label {
     display: block;
     font-weight: bold;
-   
-  }
 
-  
-  
-  input {
-    width: 89%;
+}
+
+
+
+input {
+    width: 100%;
     padding: 1px;
     border: none;
     margin-top: 10px;
     background-color: transparent;
     color: white;
-    
+
     font-size: 18px;
-  }
-  
-  .input-line {
+}
+
+.input-line {
     height: 1px;
     background-color: white;
     margin-top: 1px;
-    width: 90%;
-  }
-  input:focus {
+    width: 100%;
+}
+input:focus {
     outline: 2px solid rgba( 255, 255, 255, 0.18 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     border-radius: 5px;
 
-  }
+}
 
-  .login-button {
+.login-button {
     background-color: #2a62fe;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
-background: linear-gradient(145deg, #2658e5, #2d69ff);
-box-shadow:  24px 24px 49px #2453d8,
-             -24px -24px 49px #3071ff;
-             margin-right: 10px;
-  }
-  
-  .guest-button {
+    background: linear-gradient(145deg, #2658e5, #2d69ff);
+    box-shadow:  24px 24px 49px #2453d8,
+    -24px -24px 49px #3071ff;
+}
+
+.guest-button {
     background-color: #ce2dab;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background: linear-gradient(145deg, #e52695, #ff2db9);
-box-shadow:  24px 24px 49px #d824a8,
-             -24px -24px 49px #ff3097;
-             margin-right: 10px;
-  }
-  
-  .centered-content {
+    box-shadow:  24px 24px 49px #d824a8,
+    -24px -24px 49px #ff3097;
+    margin-right: -10px;
+}
+
+.centered-content {
+    gap: 30px;
     margin-top: 30px;
     display: flex;
     justify-content: center;
-  }
+}
