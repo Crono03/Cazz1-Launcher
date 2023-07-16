@@ -20,7 +20,7 @@ enum Error {
     InvalidEmail(String),
     #[error("{0}")]
     InvalidUsername(String),
-    #[error("{0}")]
+    #[error("psoelllo1")]
     InvalidPasswordLenght(String),
     #[error("{0}")]
     InvalidPassword(String),
