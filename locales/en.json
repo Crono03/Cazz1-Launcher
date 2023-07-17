@@ -1,6 +1,12 @@
 {
     "login": "Log in",
     "continueAsGuest": "Continue as guest",
-    "invalidPassword": "Username or Password wrong!"
+    "usernameDuplicate": "Username already in use",
+    "notSamePassword": "Passwords are not the same",
+    "tooShortPassword": "Password is too short, make it al least 8 chars",
+    "tooLongPassword": "Password is too long, make it not more than 255 chars",
+    "invalidPassword": "Invalid password, try with another",
+    "invalidEmail": "Invalid email",
+    "invalidUsername": "Invalid username"
   }
   

@@ -1,6 +1,12 @@
 {
     "login": "Accedi",
     "continueAsGuest": "Continua come ospite",
-    "invalidPassword": "Username o Password errati"
+    "usernameDuplicate": "Username già in uso",
+    "notSamePassword": "Le password non sono uguali",
+    "tooShortPassword": "Password torppo corta, usane una non più corta di 8 caratteri",
+    "tooLongPassword": "Password torppo lunga, usane una non più lunga di 255 caratteri",
+    "invalidPassword": "La password non è valida",
+    "invalidEmail": "L' indirizzo email non è valido",
+    "invalidUsername": "Lo username non è valido"
   }
   
