@@ -1,16 +1,15 @@
-import { invoke } from '@tauri-apps/api/tauri';
-import React, { useState } from "react";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import React from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import './Homepage.css'
 
 const HomePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const username: string = location.state.username
+    window.$username = location.state.username;
+    window.$guest = location.state.guest;
     function startMinecraft() {
 
     }
-
     return (
         <div style={{ width: "950px", height: "640px", display: "flex", flexWrap: "nowrap", flexFlow: "column" }}>
             <main style={{ flexBasis: "85%", display: "flex", flexFlow: "row", flexWrap: "nowrap", order: "1" }}>
@@ -26,11 +25,7 @@ const HomePage = () => {
                     </div>
                 </section>
                 <aside style={{ order: "1", flexBasis: "15%", margin: "5px" }}>
-                    <ul>
-                        <li>{username}</li>
-                        <li>picone</li>
-                        <li>picone</li>
-                    </ul>
+                        <nav><h2>{guest ? "Guest" : username}</h2></nav>
                 </aside>
             </main>
             <footer style={{ order: "2", flexBasis: "15%", margin: "5px", display: "grid", width: "auto" }}>

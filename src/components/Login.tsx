@@ -3,8 +3,8 @@ import { getTranslation } from '../backend/languageManager';
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { invoke } from '@tauri-apps/api';
-import { type } from 'os';
 // Quando la lingua cambia, impostala nel modulo di gestione delle lingue
+
 
 
 
@@ -41,15 +41,17 @@ const Login = () => {
     const handleLogin = () => {
         invoke("login", { usernameEmail: getusernameEmail, password: getpassword })
             .then((result) => {
-                if (isUser(result))
+                if (isUser(result)){
+                    window.localStorage.setItem("Username", result.username)
                     navigate("/homepage")
+                }
             })
-            .catch((error) => setValidate(error));
+            .catch((error) => setValidate(getTranslation(error)));
 
     };
 
     const handleContinueAsGuest = () => {
-        navigate("/homepage", { state: { username: "" } })
+        navigate("/homepage", { state: { username: "", guest: true } })
     };
 
 

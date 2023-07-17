@@ -1,10 +1,12 @@
 import { invoke } from "@tauri-apps/api";
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getTranslation } from "../backend/languageManager";
 
 import "../components/login.css"
 const SignUpPage = () => {
+    const navigate= useNavigate();
     const [getusername, setUsername] = useState("");
     const [getEmail, setEmail] = useState("");
     const [getpassword, setPassword] = useState("");
@@ -12,7 +14,7 @@ const SignUpPage = () => {
     const [getvalidate, setValidate] = useState("");
     const [passwordVisible, setpasswordVisible] = useState(false);
     const handleSignUp = () => {
-        invoke("signup", { username: getusername, email: getEmail, password: getpassword, confirmPassword: getconfirmpassword }).then((validato) => console.log(validato)).catch((reason) => { setValidate(getTranslation(reason)); console.log(reason) })
+        invoke("signup", { username: getusername, email: getEmail, password: getpassword, confirmPassword: getconfirmpassword }).then((_) => navigate("/homepage", { state: { username: getusername, guest: false } })).catch((reason) => { setValidate(getTranslation(reason)); console.log(reason) })
     };
 
 
