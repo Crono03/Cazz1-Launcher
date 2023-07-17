@@ -1,5 +1,6 @@
 {
     "login": "Log in",
+    "signup": "Sign Up",
     "continueAsGuest": "Continue as guest",
     "usernameDuplicate": "Username already in use",
     "notSamePassword": "Passwords are not the same",
