@@ -1,5 +1,6 @@
 {
     "login": "Accedi",
+    "signup": "Registrati",
     "continueAsGuest": "Continua come ospite",
     "usernameDuplicate": "Username già in uso",
     "notSamePassword": "Le password non sono uguali",

@@ -59,7 +59,7 @@ const Login = () => {
                 <button className="login-button" onClick={handleLogin}>
                     {getTranslation('login')}
                 </button>
-                <button className='signup-button' onClick={() => setGoToSignUpPage(true)}>Sign Up</button>
+                <button className='signup-button' onClick={() => setGoToSignUpPage(true)}>{getTranslation("signup")}</button>
             </div>
             <div className="separator">OR</div>
             <div className='centered-content'>
