@@ -3,6 +3,7 @@ import { getTranslation } from '../backend/languageManager';
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { invoke } from '@tauri-apps/api';
+import ls from 'localstorage-slim';
 // Quando la lingua cambia, impostala nel modulo di gestione delle lingue
 
 
@@ -32,7 +33,7 @@ const Login = () => {
     const [getpassword, setPassword] = useState("");
     const [getvalidate, setValidate] = useState("");
     const [passwordVisible, setpasswordVisible] = useState(false);
-    const [goToSignUpPage, setGoToSignUpPage] = React.useState(false);
+    const [goToSignUpPage, setGoToSignUpPage] = useState(false);
 
     if (goToSignUpPage) {
         return <Navigate to='/signup' />
@@ -41,17 +42,22 @@ const Login = () => {
     const handleLogin = () => {
         invoke("login", { usernameEmail: getusernameEmail, password: getpassword })
             .then((result) => {
-                if (isUser(result)){
-                    window.localStorage.setItem("Username", result.username)
-                    navigate("/homepage")
+                if (isUser(result)) {
+                    ls.set("Username", result.username);
+                    ls.set("Password", result.password);
+                    ls.set("Guest", false);
+                    navigate("/homepage");
                 }
             })
             .catch((error) => setValidate(getTranslation(error)));
 
     };
 
+
     const handleContinueAsGuest = () => {
-        navigate("/homepage", { state: { username: "", guest: true } })
+        ls.set("Username", "");
+        ls.set("Guest", true)
+        navigate("/homepage")
     };
 
 

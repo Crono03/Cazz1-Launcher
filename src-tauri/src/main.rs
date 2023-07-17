@@ -24,7 +24,7 @@ enum Error {
     InvalidEmail,
     #[error("{0}")]
     InvalidUsername(String),
-    #[error("psoelllo1")]
+    #[error("{0}")]
     InvalidPasswordLenght(String),
     #[error("invalidPassword")]
     InvalidPassword,
@@ -72,7 +72,7 @@ async fn signup(
         return Err(Error::InvalidPasswordLenght("tooShortPassword".to_string()));
     }
     if password.len() > 255 {
-        return Err(Error::InvalidPasswordLenght("tooLognPassword".to_string()));
+        return Err(Error::InvalidPasswordLenght("tooLongPassword".to_string()));
     }
     let password_regex = Regex::new(r#"^((?!.*[\s"';])(?=.*[A-Z])(?=.*\d).{8,255})$"#).unwrap();
     if !password_regex.is_match(password).unwrap() {
