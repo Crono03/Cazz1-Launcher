@@ -9,6 +9,8 @@
     "invalidEmail": "Invalid email",
     "invalidUsername": "Invalid username",
     "connectionError": "Connection error",
-    "wSError": "The database is offline"
+    "emailAlreadyInUse": "Email Already in use",
+    "wSError": "The database is offline",
+    "userNotExists": "Username/email or password is incorrect"
   }
   

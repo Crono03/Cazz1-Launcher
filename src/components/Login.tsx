@@ -1,38 +1,55 @@
 import './login.css';
 import { getTranslation } from '../backend/languageManager';
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { invoke } from '@tauri-apps/api';
+import { type } from 'os';
 // Quando la lingua cambia, impostala nel modulo di gestione delle lingue
 
 
 
 const Login = () => {
+
+    const navigate = useNavigate();
+
+    type User = {
+        email: string,
+        password: string,
+        username: string
+    }
+
+    function isUser(obj: any): obj is User {
+        return (
+            typeof obj === 'object' &&
+            obj !== null &&
+            'email' in obj &&
+            'password' in obj &&
+            'username' in obj
+        );
+    }
+
     const [getusernameEmail, setUsernameEmail] = useState("");
     const [getpassword, setPassword] = useState("");
     const [getvalidate, setValidate] = useState("");
     const [passwordVisible, setpasswordVisible] = useState(false);
-
-    const [goToHomePage, setGoToHomePage] = React.useState(false);
     const [goToSignUpPage, setGoToSignUpPage] = React.useState(false);
-
-    if (goToHomePage) {
-        return <Navigate to='/homepage' />
-    }
 
     if (goToSignUpPage) {
         return <Navigate to='/signup' />
     }
 
     const handleLogin = () => {
-        invoke("login", { username: getusernameEmail, password: getpassword })
-            .then((_) => setGoToHomePage(true))
+        invoke("login", { usernameEmail: getusernameEmail, password: getpassword })
+            .then((result) => {
+                if (isUser(result))
+                    navigate("/homepage")
+            })
             .catch((error) => setValidate(error));
 
     };
 
     const handleContinueAsGuest = () => {
-        setGoToHomePage(true);
+        navigate("/homepage", { state: { username: "" } })
     };
 
 
@@ -52,7 +69,7 @@ const Login = () => {
                 <input type={passwordVisible ? "text" : "password"} id="password"
                     value={getpassword}
                     onChange={(e) => setPassword(e.target.value)} />
-                <img id="togglepasswordview" onClick={() => setpasswordVisible(!passwordVisible)} src={passwordVisible ? "/src/assets/images/hide.png" : "/src/assets/images/show.png"}/>
+                <img id="togglepasswordview" onClick={() => setpasswordVisible(!passwordVisible)} src={passwordVisible ? "/src/assets/images/hide.png" : "/src/assets/images/show.png"} />
                 <div className="input-line"></div>
             </div>
             <div className='centered-content'>
