@@ -7,6 +7,8 @@
     "tooLongPassword": "Password torppo lunga, usane una non più lunga di 255 caratteri",
     "invalidPassword": "La password non è valida",
     "invalidEmail": "L' indirizzo email non è valido",
-    "invalidUsername": "Lo username non è valido"
+    "invalidUsername": "Lo username non è valido",
+    "connectionError": "Errore di connessione",
+    "wSError": "Il database è offline"
   }
   
