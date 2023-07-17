@@ -3,8 +3,8 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getTranslation } from "../backend/languageManager";
-
 import "../components/login.css"
+import { I } from "@tauri-apps/api/path-c062430b";
 const SignUpPage = () => {
     const navigate= useNavigate();
     const [getusername, setUsername] = useState("");
@@ -20,7 +20,7 @@ const SignUpPage = () => {
 
     return (
         <div className="login-container">
-            <h2>Sign Up</h2>
+            <h2>{getTranslation("signup")}</h2>
             <p className="errore">{getvalidate}</p>
             <div className="input-container">
                 <label htmlFor="username">Username</label>
@@ -45,7 +45,7 @@ const SignUpPage = () => {
                 <div className="input-line"></div>
             </div>
             <div className="input-container">
-                <label htmlFor="confirmpassword">Confirm password</label>
+                <label htmlFor="confirmpassword">{getTranslation("confirmpass")}</label>
                 <input type={passwordVisible ? "text" : "password"} id="confirmpassword"
                     value={getconfirmpassword}
                     onChange={(e) => setConfirmPassword(e.target.value)} />
@@ -53,8 +53,10 @@ const SignUpPage = () => {
                 <div className="input-line"></div>
             </div>
             <div className='centered-content'>
+            <img src="/src/assets/images/arrow.png" onClick={handleSignUp}/>
+                    
                 <button className="login-button" onClick={handleSignUp}>
-                    Sign up
+                    {getTranslation("signup")}
                 </button>
             </div>
         </div>

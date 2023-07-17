@@ -1,5 +1,6 @@
 {
     "login": "Accedi",
+    "signup": "Registrati",
     "continueAsGuest": "Continua come ospite",
     "usernameDuplicate": "Username già in uso",
     "notSamePassword": "Le password non sono uguali",
@@ -11,5 +12,6 @@
     "connectionError": "Errore di connessione",
     "emailAlreadyInUse": "Email già in uso",
     "wSError": "Il database è offline",
-    "userNotExists": "Username/email o password errati"
+    "userNotExists": "Username/email o password errati",
+    "confirmpass": "Conferma Password"
   }
