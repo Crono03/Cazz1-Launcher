@@ -10,6 +10,7 @@
     "invalidEmail": "Invalid email",
     "invalidUsername": "Invalid username",
     "connectionError": "Connection error",
-    "wSError": "The database is offline"
+    "wSError": "The database is offline",
+    "confirmpass": "Confirm Password"
   }
   
