@@ -10,6 +10,7 @@
     "invalidEmail": "L' indirizzo email non è valido",
     "invalidUsername": "Lo username non è valido",
     "connectionError": "Errore di connessione",
-    "wSError": "Il database è offline"
+    "wSError": "Il database è offline",
+    "confirmpass": "Conferma Password"
   }
   
