@@ -164,7 +164,21 @@ async fn login(username_email: &str, password: &str) -> Result<User, Error> {
     } else {
         username = false;
     }
-    let db = Surreal::new::<Ws>("127.0.0.1:8000").await?;
+    let connection: Result<Surreal<ws::Client>, surrealdb::Error> =
+        Surreal::new::<Ws>("127.0.0.1:8000").await;
+    let db: Surreal<ws::Client>;
+    match connection {
+        Ok(client) => db = client,
+        Err(surrealdb::Error::Api(surrealdb::error::Api::Ws(_))) => {
+            return Err(Error::Connection("wSError".to_string()))
+        }
+        Err(surrealdb::Error::Api(_)) => {
+            return Err(Error::Connection("connectionError".to_string()))
+        }
+        Err(surrealdb::Error::Db(_)) => {
+            return Err(Error::Connection("connectionError".to_string()))
+        }
+    }
     db.signin(surrealdb::opt::auth::Root {
         username: "root",
         password: "pic1",

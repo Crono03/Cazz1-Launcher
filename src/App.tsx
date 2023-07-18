@@ -6,13 +6,16 @@ import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import ChangeLog from './components/ChangeLog';
 import SignUpPage from './pages/SignUpPage';
-import Check from './components/Check';
+import Loading from './components/Loading';
+import OfflinePage from './pages/OfflinePage';
+
 const App = () => {
     return (
         <Router>
             <Routes>
-                <Route index element={<Check />} />
+                <Route index element={<Loading />} />
                 <Route path="login" element={<Login />} />
+                <Route path="offline" element={<OfflinePage />} />
                 <Route path='signup' element={<SignUpPage />} />
                 <Route path="homepage" element={<HomePage />} >
                     <Route path="changelog" element={<ChangeLog />} />
