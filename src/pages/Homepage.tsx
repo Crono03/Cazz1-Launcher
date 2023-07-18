@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet,  useNavigate } from "react-router-dom";
 import ls from 'localstorage-slim';
 import './Homepage.css';
+import { P } from "@tauri-apps/api/event-41a9edf5";
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -12,13 +13,17 @@ const HomePage = () => {
         <div style={{ width: "950px", height: "640px", display: "flex", flexWrap: "nowrap", flexFlow: "column" }}>
             <main style={{ flexBasis: "85%", display: "flex", flexFlow: "row", flexWrap: "nowrap", order: "1" }}>
                 <section style={{ display: "flex", flexDirection: "column", flexWrap: "nowrap", flex: "1", margin: "5px", order: "2" }}>
-                    <nav style={{ order: "1" }}>
-                        <button onClick={() => {
-                            navigate("changelog")
+                    <nav  style={{ order: "1", margin: "-15px" }}>
+                     <button className="schede"onClick={() => {
+                     navigate("changelog")
                         }
-                        }>Change Log</button>
+                        }><p>Changelog</p>
+                     </button>
+                     <button className="schede"></button>
+                     <button className="schede"></button>
+                     <button className="schede"></button>         
                     </nav>
-                    <div id='homepageoutletroot' style={{ flex: "1 1 auto", order: "2", overflow: 'auto', }}>
+                    <div id='homepageoutletroot' className="pageBackground" style={{ flex: "1 1 auto", order: "2", overflow: 'auto', }}>
                         <Outlet />
                     </div>
                 </section>
