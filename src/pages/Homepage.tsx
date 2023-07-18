@@ -11,7 +11,7 @@ const HomePage = () => {
     }
     return (
         <div style={{ width: "950px", height: "640px", display: "flex", flexWrap: "nowrap", flexFlow: "column" }}>
-            <main style={{ flexBasis: "85%", display: "flex", flexFlow: "row", flexWrap: "nowrap", order: "1" }}>
+            <main style={{ flexBasis: "85%", display: "flex", flexFlow: "row", flexWrap: "nowrap", order: "1", overflow:"auto"}}>
                 <section style={{ display: "flex", flexDirection: "column", flexWrap: "nowrap", flex: "1", margin: "5px", order: "2" }}>
                     <nav  style={{ order: "1", margin: "-15px" }}>
                      <button className="schede"onClick={() => {
