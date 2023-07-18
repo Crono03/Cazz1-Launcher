@@ -46,7 +46,11 @@ const Login = () => {
                     navigate("/homepage");
                 }
             })
-            .catch((error) => setValidate(getTranslation(error)));
+            .catch((error) => {if (error == "wSError") {
+                navigate("/offline");
+            } else {
+                setValidate(getTranslation(error));
+            }});
 
     };
 
