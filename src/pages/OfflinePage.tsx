@@ -11,7 +11,7 @@ const OfflinePage = () => {
 
     return (
         <div style={{ width: "100%", height: "100%", display: "flex", flexWrap: "nowrap", flexFlow: "column" }}>
-            <main style={{ width: "auto", flexBasis: "85%", display: "flex", flexFlow: "column", flexWrap: "nowrap", order: "1", justifyContent: "center" }}>
+            <main id="mainOffline" style={{ width: "auto", flexBasis: "85%", display: "flex", flexFlow: "column", flexWrap: "nowrap", order: "1", justifyContent: "center" }}>
                 <p style={{
                     color: "red",
                     fontSize: "100px",
