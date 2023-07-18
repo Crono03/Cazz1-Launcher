@@ -1,8 +1,9 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { invoke } from '@tauri-apps/api';
 import ls from 'localstorage-slim';
 import './Loading.css'
+import { isNull } from "util";
 const Loading = () => {
 
     const navigate = useNavigate();
@@ -23,6 +24,9 @@ const Loading = () => {
         );
     }
 
+    async function vaiAFanculo() {
+        return "login";
+    }
     React.useLayoutEffect(() => {
         if (ls.get("Username") && ls.get("Password")) {
             invoke("login", { usernameEmail: ls.get("Username"), password: ls.get("Password") })
@@ -41,7 +45,7 @@ const Loading = () => {
                     }
                 });
         } else {
-            navigate("/login")
+            vaiAFanculo().then((result) => navigate(result))
         }
     });
 
