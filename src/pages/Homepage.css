@@ -45,6 +45,9 @@ section, aside, footer{
   .schede:first-child {
     border-top-left-radius: 10px;
   }
+  .schede:focus {
+    transform: scale(1.05); /* Aumenta la dimensione del button del 10% */
+  }
   .schede p {
     margin: 0px;
     font-size: 13px;

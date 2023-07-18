@@ -18,7 +18,11 @@ const HomePage = () => {
                         }
                         }><p>Changelog</p>
                      </button>
-                     <button className="schede"></button>
+                     <button className="schede"onClick={() => {
+                     navigate("minecraft")
+                        }
+                        }><p>Minecraft</p>
+                        </button>
                      <button className="schede"></button>
                      <button className="schede"></button>         
                     </nav>

@@ -8,6 +8,7 @@ import ChangeLog from './components/ChangeLog';
 import SignUpPage from './pages/SignUpPage';
 import Loading from './components/Loading';
 import OfflinePage from './pages/OfflinePage';
+import Minecraft from './components/Minecraft';
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path='signup' element={<SignUpPage />} />
                 <Route path="homepage" element={<HomePage />} >
                     <Route path="changelog" element={<ChangeLog />} />
+                    <Route path="minecraft" element={<Minecraft />} />
                 </Route>
             </Routes>
         </Router>
