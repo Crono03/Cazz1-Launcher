@@ -1,7 +1,7 @@
-/*
- * @NOTE: Prepend a `~` to css file paths that are in your node_modules
- *        See https://github.com/webpack-contrib/sass-loader#imports
- */
+#root {
+    width: 100%;
+    height: 100%;
+}
  body {
   position: relative;
   color: white;

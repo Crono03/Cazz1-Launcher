@@ -1,0 +1,28 @@
+main, footer{
+    background: rgba( 74, 144, 226, 0.3 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4.5px );
+    -webkit-backdrop-filter: blur( 4.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    padding: 20px;
+    margin: 5px;
+}
+
+#homepageoutletroot > div {
+    height: 0;
+}
+
+.play-button{
+    justify-self: center;
+    width: 200px;
+    font-size: 40px;
+    background-color: #2afe62;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: linear-gradient(145deg, #26e558, #2dff69);
+    box-shadow:  24px 24px 49px #24d853,
+             -24px -24px 49px #30ff71;
+             margin-right: 10px;
+}

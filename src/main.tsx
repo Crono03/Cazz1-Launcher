@@ -3,10 +3,13 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import ls from 'localstorage-slim';
 //import "./styles.css";
+
 window.addEventListener('beforeunload', (_) => {
     ls.set("LastTimeOnline", new Date());
 });
+
 let olddate = ls.get("LastTimeOnline");
+
 if (olddate instanceof Date && !isNaN(olddate.valueOf())) {
     let datediff = Math.abs(olddate.valueOf() - new Date().valueOf());
     const THREE_MONTHS = 1000 * 60 * 60 * 24 * 90;

@@ -6,9 +6,6 @@ import { invoke } from '@tauri-apps/api';
 import ls from 'localstorage-slim';
 // Quando la lingua cambia, impostala nel modulo di gestione delle lingue
 
-
-
-
 const Login = () => {
 
     const navigate = useNavigate();
