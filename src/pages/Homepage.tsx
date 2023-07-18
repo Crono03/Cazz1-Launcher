@@ -2,7 +2,6 @@ import React from "react";
 import { Outlet,  useNavigate } from "react-router-dom";
 import ls from 'localstorage-slim';
 import './Homepage.css';
-import { P } from "@tauri-apps/api/event-41a9edf5";
 
 const HomePage = () => {
     const navigate = useNavigate();
