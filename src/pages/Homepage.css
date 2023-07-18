@@ -26,3 +26,32 @@ section, aside, footer{
              -24px -24px 49px #30ff71;
              margin-right: 10px;
 }
+.schede {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    padding: 4px;
+    margin-right: 0px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    width: 100px;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+    
+  }
+  .schede:first-child {
+    border-top-left-radius: 10px;
+  }
+  .schede p {
+    margin: 0px;
+    font-size: 13px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  .pageBackground{
+    background-color: #1e1e1ea8;
+    border-radius: 10px;
+    margin-left: -15px;
+}
