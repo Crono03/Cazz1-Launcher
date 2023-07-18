@@ -3,7 +3,6 @@ import { Outlet,  useNavigate } from "react-router-dom";
 import ls from 'localstorage-slim';
 import './Homepage.css';
 
-
 const HomePage = () => {
     const navigate = useNavigate();
     function startMinecraft() {
