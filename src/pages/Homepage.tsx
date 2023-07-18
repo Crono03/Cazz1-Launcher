@@ -1,35 +1,29 @@
-import { invoke } from '@tauri-apps/api/tauri';
-import { log } from "console";
 import React from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import './Homepage.css'
+import { Outlet,  useNavigate } from "react-router-dom";
+import ls from 'localstorage-slim';
+import './Homepage.css';
 
 const HomePage = () => {
-    const navigate= useNavigate();
-
-    function goToPage(page: string) {
-        invoke("database").then((msg) => console.log(msg))
-        navigate(page)
-    }
-
+    const navigate = useNavigate();
     function startMinecraft() {
 
     }
     return (
         <div style={{ width: "950px", height: "640px", display: "flex", flexWrap: "nowrap", flexFlow: "column" }}>
             <main style={{ flexBasis: "85%", display: "flex", flexFlow: "row", flexWrap: "nowrap", order: "1" }}>
-                <section style={{ flexBasis: "85%", margin: "5px", order: "2" }}>
-                    <nav>
-                        <button onClick={() => goToPage("changelog")}>Change Log</button>
+                <section style={{ display: "flex", flexDirection: "column", flexWrap: "nowrap", flex: "1", margin: "5px", order: "2" }}>
+                    <nav style={{ order: "1" }}>
+                        <button onClick={() => {
+                            navigate("changelog")
+                        }
+                        }>Change Log</button>
                     </nav>
-                    <Outlet />
+                    <div id='homepageoutletroot' style={{ flex: "1 1 auto", order: "2", overflow: 'auto', }}>
+                        <Outlet />
+                    </div>
                 </section>
-                <aside style={{ order: "1", flexBasis: "15%", margin: "5px" }}>
-                    <ul>
-                        <li>picone</li>
-                        <li>picone</li>
-                        <li>picone</li>
-                    </ul>
+                <aside style={{ order: "1", flexBasis: "20%", margin: "5px", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        <nav><h2 style={{ overflow: "hidden", textOverflow: "ellipsis", margin: "0" }}>{ls.get("Guest") ? "Guest" : ls.get("Username")}</h2></nav>
                 </aside>
             </main>
             <footer style={{ order: "2", flexBasis: "15%", margin: "5px", display: "grid", width: "auto" }}>

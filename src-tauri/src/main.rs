@@ -16,20 +16,22 @@ enum Error {
     RemoteDB(#[from] surrealdb::error::Api),
     #[error("Database s:E error: {0}")]
     Surreal(#[from] surrealdb::Error),
-    #[error("{0}")]
-    UtenteNonEsiste(String),
-    #[error("{0}")]
-    PasswordNotEquals(String),
-    #[error("{0}")]
-    InvalidEmail(String),
+    #[error("userNotExists")]
+    UserNotExists,
+    #[error("notSamePassword")]
+    PasswordNotEquals,
+    #[error("invalidEmail")]
+    InvalidEmail,
     #[error("{0}")]
     InvalidUsername(String),
-    #[error("psoelllo1")]
-    InvalidPasswordLenght(String),
     #[error("{0}")]
-    InvalidPassword(String),
+    InvalidPasswordLenght(String),
+    #[error("invalidPassword")]
+    InvalidPassword,
     #[error("{0}")]
     Connection(String),
+    #[error("emailAlreadyInUse")]
+    EmailAlreadyInUse,
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
@@ -40,6 +42,7 @@ struct Record {
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 struct User {
+    username: String,
     email: String,
     password: String,
 }
@@ -63,30 +66,32 @@ async fn signup(
     confirm_password: &str,
 ) -> Result<Record, Error> {
     if password != confirm_password {
-        return Err(Error::PasswordNotEquals("notSamePassword".to_string()));
+        return Err(Error::PasswordNotEquals);
     }
     if password.len() < 8 {
         return Err(Error::InvalidPasswordLenght("tooShortPassword".to_string()));
     }
     if password.len() > 255 {
-        return Err(Error::InvalidPasswordLenght("tooLognPassword".to_string()));
+        return Err(Error::InvalidPasswordLenght("tooLongPassword".to_string()));
     }
     let password_regex = Regex::new(r#"^((?!.*[\s"';])(?=.*[A-Z])(?=.*\d).{8,255})$"#).unwrap();
     if !password_regex.is_match(password).unwrap() {
-        return Err(Error::InvalidPassword("invalidPassword".to_string()));
+        return Err(Error::InvalidPassword);
     }
     let email_regex = Regex::new(
         r"^([a-z0-9_+]([a-z0-9_+.]*[a-z0-9_+])?)@([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6})",
     )
     .unwrap();
     if !email_regex.is_match(email).unwrap() {
-        return Err(Error::InvalidEmail("invalidEmail".to_string()));
+        return Err(Error::InvalidEmail);
     }
-    let username_regex = Regex::new(r"^[a-zA-Z0-9]{3,10}$").unwrap();
+    let username_regex =
+        Regex::new(r"^(?=.{3,64}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$").unwrap();
     if !username_regex.is_match(username).unwrap() {
         return Err(Error::InvalidUsername("invalidUsername".to_string()));
     }
-    let connection: Result<Surreal<ws::Client>, surrealdb::Error> = Surreal::new::<Ws>("127.0.0.1:8000").await;
+    let connection: Result<Surreal<ws::Client>, surrealdb::Error> =
+        Surreal::new::<Ws>("127.0.0.1:8000").await;
     let db: Surreal<ws::Client>;
     match connection {
         Ok(client) => db = client,
@@ -107,9 +112,19 @@ async fn signup(
     .await?;
     db.use_ns("test").use_db("test").await?;
 
+    let mut utente = db
+        .query(format!(r#"SELECT * FROM users WHERE email="{}""#, email))
+        .await?;
+    let esiste: Option<User> = utente.take(0)?;
+    match esiste {
+        Some(_) => return Err(Error::EmailAlreadyInUse),
+        None => (),
+    }
+
     let result: Result<_, surrealdb::Error> = db
         .create(("users", username))
         .content(User {
+            username: username.to_string(),
             email: email.to_string(),
             password: password.to_string(),
         })
@@ -130,7 +145,25 @@ async fn signup(
 }
 
 #[tauri::command]
-async fn login(username: &str, password: &str) -> Result<User, Error> {
+async fn login(username_email: &str, password: &str) -> Result<User, Error> {
+    let mut username: bool = true;
+    let password_regex = Regex::new(r#"^((?!.*[\s"';])(?=.*[A-Z])(?=.*\d).{8,255})$"#).unwrap();
+    if !password_regex.is_match(password).unwrap() {
+        return Err(Error::UserNotExists);
+    }
+    let email_regex = Regex::new(
+        r"^([a-z0-9_+]([a-z0-9_+.]*[a-z0-9_+])?)@([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6})",
+    )
+    .unwrap();
+    if !email_regex.is_match(username_email).unwrap() {
+        let username_regex =
+            Regex::new(r"^(?=.{3,64}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$").unwrap();
+        if !username_regex.is_match(username_email).unwrap() {
+            return Err(Error::UserNotExists);
+        }
+    } else {
+        username = false;
+    }
     let db = Surreal::new::<Ws>("127.0.0.1:8000").await?;
     db.signin(surrealdb::opt::auth::Root {
         username: "root",
@@ -138,18 +171,24 @@ async fn login(username: &str, password: &str) -> Result<User, Error> {
     })
     .await?;
     db.use_ns("test").use_db("test").await?;
-
-    let mut utente = db
-        .query(format!(
-            "SELECT * FROM users WHERE id=\"users:{username}\" and password=\"{password}\""
-        ))
-        .await?;
+    let mut utente: surrealdb::Response;
+    if username {
+        utente = db
+            .query(format!(
+                r#"SELECT * FROM users WHERE id="users:{username_email}" and password="{password}""#
+            ))
+            .await?;
+    } else {
+        utente = db
+            .query(format!(
+                r#"SELECT * FROM users WHERE email="{username_email}" and password="{password}""#
+            ))
+            .await?;
+    }
     let esiste: Option<User> = utente.take(0)?;
     match esiste {
         Some(user) => Ok(user),
-        None => Err(Error::UtenteNonEsiste(
-            "Nome utente o password sbagliati".to_string(),
-        )),
+        None => Err(Error::UserNotExists),
     }
 }
 

@@ -9,6 +9,10 @@ section, aside, footer{
     padding: 20px;
 }
 
+#homepageoutletroot > div {
+    height: 0;
+}
+
 .play-button{
     justify-self: center;
     width: 200px;

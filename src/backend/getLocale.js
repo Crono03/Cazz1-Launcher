@@ -1,6 +1,4 @@
 import { setLanguage } from "./languageManager";
-import { invoke } from '@tauri-apps/api/tauri';
-
 
 
 function getLocaleLanguage() {
