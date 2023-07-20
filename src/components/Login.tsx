@@ -9,14 +9,6 @@ import { open } from '@tauri-apps/api/shell';
 // Quando la lingua cambia, impostala nel modulo di gestione delle lingue
 
 const Login = () => {
-    // MEGA DEBUG RIMUOVERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const [triggerForgotPasswordError, setTriggerForgotPasswordError] = useState(true);
-
-
-  
-  const [showForgotPasswordMessage, setShowForgotPasswordMessage] = useState(false);
-
-
     const navigate = useNavigate();
 
     type User = {
@@ -35,6 +27,7 @@ const Login = () => {
         );
     }
 
+    const [errorCount, setErrorCount] = useState(0);
     const [getusernameEmail, setUsernameEmail] = useState("");
     const [getpassword, setPassword] = useState("");
     const [getvalidate, setValidate] = useState("");
@@ -55,28 +48,25 @@ const Login = () => {
                     navigate("/homepage");
                 }
             })
-            .catch((error) => {if (error == "wSError") {
-                navigate("/offline");
-            } else {
+            .catch((error) => {
+                if (error == "wSError") {
+                    navigate("/offline");
+                }
                 setValidate(getTranslation(error));
-                if (error === "ForgotPassword" || triggerForgotPasswordError) {
-                    setShowForgotPasswordMessage(true);
-                  } else {
-                    setShowForgotPasswordMessage(false);
-                  }
-            }});
+                setErrorCount(errorCount + 1);
+            });
 
     };
 
 
     const handleContinueAsGuest = () => {
         ls.set("Username", "");
-        ls.set("Guest", true)
-        navigate("/homepage")
+        ls.set("Guest", true);
+        navigate("/homepage");
     };
 
     const handleForgotPassword = () => {
-       open("http://cazz1.us.to/ita.html");
+        open("http://cazz1.us.to/ita.html");
     };
 
 
@@ -98,7 +88,7 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)} />
                 <img id="togglepasswordview" onClick={() => setpasswordVisible(!passwordVisible)} src={passwordVisible ? "/src/assets/images/hide.png" : "/src/assets/images/show.png"} />
                 <div className="input-line"></div>
-                {showForgotPasswordMessage && <a href="#" className="forgot-password-message"onClick={handleForgotPassword}>{getTranslation("forgotpassword")}</a>}
+                {errorCount>=3 ? <a href="#" className="forgot-password-message" onClick={handleForgotPassword}>{getTranslation("forgotpassword")}</a> : <></>}
             </div>
             <div className='centered-content'>
                 <button className="login-button" onClick={handleLogin}>
