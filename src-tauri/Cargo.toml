@@ -22,6 +22,7 @@ rusqlite = { version = "0.29.0", features = ["bundled"] }
 thiserror = "1.0"
 surrealdb = "1.0.0-beta.9"
 fancy-regex = "0.11.0"
+lettre = "0.10"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
