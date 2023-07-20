@@ -32,8 +32,6 @@ enum Error {
     Connection(String),
     #[error("emailAlreadyInUse")]
     EmailAlreadyInUse,
-    #[error("{0}")]
-    ForgotPassword(String),
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
@@ -80,11 +78,6 @@ async fn signup(
     let password_regex = Regex::new(r#"^((?!.*[\s"';])(?=.*[A-Z])(?=.*\d).{8,255})$"#).unwrap();
     if !password_regex.is_match(password).unwrap() {
         // Aumenta il contatore dei tentativi falliti
-        password_attempts += 1;
-        if password_attempts >= 3 {
-            return Err(Error::ForgotPassword("forgotPassword".to_string()));
-
-        }
         return Err(Error::InvalidPassword);
     }
     let email_regex = Regex::new(
