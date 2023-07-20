@@ -13,5 +13,6 @@
     "emailAlreadyInUse": "Email già in uso",
     "wSError": "Il database è offline",
     "userNotExists": "Username/email o password errati",
-    "confirmpass": "Conferma Password"
+    "confirmpass": "Conferma Password",
+    "forgotpassword": "Hai dimenticato la password?"
   }
